@@ -28,28 +28,32 @@ function Characters(): JSX.Element {
   const [characters, setCharacters] = useState<CharData[]>([]);
   async function fetchAndStoreHPData() {
     try {
-        const allRawHPData = await axios.get("https://hp-api.onrender.com/api/characters");
-        console.log(allRawHPData)
-        setCharacters(allRawHPData.data);
+      const allRawHPData = await axios.get(
+        "https://hp-api.onrender.com/api/characters"
+      );
+      console.log(allRawHPData);
+      setCharacters(allRawHPData.data);
     } catch (error) {
-        console.error("could not complete fetch")
+      console.error("could not complete fetch");
     }
   }
-  console.log(characters)
+  console.log(characters);
   return (
     <>
       <div>
         <p>Character data</p>
         <button onClick={fetchAndStoreHPData}>Get HP Info</button>
         <div>
-            {characters.map((charData) => {
-                return <div key={charData.id}>
-                    <div>{charData.name}</div>
-                    <img src={charData.image} alt={charData.name}></img>
-                    <div>{charData.patronus}</div>
-                    <div>{charData.wand.core + ", " + charData.wand.wood}</div>
-                </div>
-            })}
+          {characters.map((charData) => {
+            return (
+              <div key={charData.id}>
+                <div>{charData.name}</div>
+                <img src={charData.image} alt={charData.name}></img>
+                <div>{charData.patronus}</div>
+                <div>{charData.wand.core + ", " + charData.wand.wood}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
